@@ -13,7 +13,7 @@ ONLINEMASTER=${ONLINEMASTER:0:32}
 CURRENTMASTER=${CURRENTMASTER:0:32} 
 echo $ONLINEMASTER
 echo $CURRENTMASTER
-if [ -f "./setup" ] && [ "$ONLINEMASTER" = "$CURRENTMASTER" ]; then
+if [ -f "./setup" ] && [ "$ONLINEMASTER" != "$CURRENTMASTER" ]; then
 	echo "You are running a out of date copy of this install script. Please *delete the local file 'setup'* and run"
 	echo ""
 	echo "curl -Ls https://github.com/Birdthulu/FPM-Installer/raw/master/setup"
