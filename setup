@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # --- Stops the script if errors are encountered. ---
 set -e
@@ -6,11 +6,17 @@ set -e
 #
 # --- Based Off of/Ripped from https://github.com/FasterMelee/FasterMelee-installer/ Thank you Faster Melee Team!
 # ---
-
-if [ -f "./setup" ] && [ -z "${IN_NIX_SHELL++}" ]; then
-	echo "You are running a hosted copy of the script. Please *delete the local file 'setup'* and run"
+ONLINEMASTER=$(curl -Ls https://github.com/ejtejada/FPM-Installer/raw/master/setup | md5sum)
+CURRENTMASTER=$(md5sum setup)
+##Cut these down to just 32 hex chars
+ONLINEMASTER=${ONLINEMASTER:0:32}
+CURRENTMASTER=${CURRENTMASTER:0:32} 
+echo $ONLINEMASTER
+echo $CURRENTMASTER
+if [ -f "./setup" ] && [ "$ONLINEMASTER" = "$CURRENTMASTER" ]; then
+	echo "You are running a out of date copy of this install script. Please *delete the local file 'setup'* and run"
 	echo ""
-	echo "sh -c \"\$(curl -Ls https://github.com/Birdthulu/FPM-Installer/raw/master/setup)"
+	echo "curl -Ls https://github.com/Birdthulu/FPM-Installer/raw/master/setup"
 	echo ""
 	echo "to ensure you have the latest version!"
 	exit
