@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # --- Stops the script if errors are encountered. ---
 set -e
@@ -9,14 +9,15 @@ set -e
 ONLINEMASTER=$(curl -Ls https://github.com/Birdthulu/FPM-Installer/raw/master/setup | md5sum)
 CURRENTMASTER=$(md5sum setup)
 ##Cut these down to just 32 hex chars
-ONLINEMASTER=${ONLINEMASTER:0:32}
-CURRENTMASTER=${CURRENTMASTER:0:32} 
+
+ONLINEMASTER=$(echo $ONLINEMASTER | cut -c -32)
+CURRENTMASTER=$(echo $CURRENTMASTER | cut -c -32)
 echo $ONLINEMASTER
 echo $CURRENTMASTER
 if [ -f "./setup" ] && [ "$ONLINEMASTER" != "$CURRENTMASTER" ]; then
 	echo "You are running a out of date copy of this install script. Please *delete the local file 'setup'* and run"
 	echo ""
-	echo "curl -Ls https://github.com/Birdthulu/FPM-Installer/raw/master/setup"
+	echo "curl -Ls https://github.com/ejtejada/FPM-Installer/raw/master/setup"
 	echo ""
 	echo "to ensure you have the latest version!"
 	exit
