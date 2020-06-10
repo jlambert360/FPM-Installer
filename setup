@@ -17,7 +17,7 @@ echo $CURRENTMASTER
 if [ -f "./setup" ] && [ "$ONLINEMASTER" != "$CURRENTMASTER" ]; then
 	echo "You are running a out of date copy of this install script. Please *delete the local file 'setup'* and run"
 	echo ""
-	echo "curl -Ls https://github.com/ejtejada/FPM-Installer/raw/master/setup"
+	echo "curl -Ls https://github.com/Birdthulu/FPM-Installer/raw/master/setup"
 	echo ""
 	echo "to ensure you have the latest version!"
 	exit
