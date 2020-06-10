@@ -6,7 +6,7 @@ set -e
 #
 # --- Based Off of/Ripped from https://github.com/FasterMelee/FasterMelee-installer/ Thank you Faster Melee Team!
 # ---
-ONLINEMASTER=$(curl -Ls https://github.com/ejtejada/FPM-Installer/raw/master/setup | md5sum)
+ONLINEMASTER=$(curl -Ls https://github.com/Birdthulu/FPM-Installer/raw/master/setup | md5sum)
 CURRENTMASTER=$(md5sum setup)
 ##Cut these down to just 32 hex chars
 
