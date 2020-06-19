@@ -58,7 +58,7 @@ SD card file size 2Gb zipped to 1.6Gb
 
 ## To use:
 
-`curl -Ls https://github.com/Birdthulu/FPM-Installer/raw/master/setup && ./setup`
+`wget https://github.com/Birdthulu/FPM-Installer/raw/master/setup && chmod +x setup && ./setup`
 
 If a different version is needed (e.g. not SL default), edit the script and replace the desired variables.
 
