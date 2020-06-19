@@ -10,7 +10,7 @@ set -e
 #If they don't have the setup file, skip the hash check and just continue the script
 if [ -e setup ]
 then
-	ONLINEMASTER=$(curl -Ls https://github.com/ejtejada/FPM-Installer/raw/master/setup | md5sum)
+	ONLINEMASTER=$(curl -Ls https://github.com/Birdthulu/FPM-Installer/raw/master/setup | md5sum)
 	CURRENTMASTER=$(md5sum setup)
 
 	#If they don't have the setup file, skip the hash check and just continue the script
