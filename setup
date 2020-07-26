@@ -325,9 +325,9 @@ sed -i -e "s|ISODirPath|${IsoPath}|" $ConfigPath
 echo "Creating shortcuts..."
 ln -s "$FOLDERNAME/bin/ishiiruka" ../launch-fpp
 if [ "$SHORTCUTBOOL" -eq 1 ] && [ -d ~/.local/share/applications ]; then
-	rm -f ~/.local/share/applications/faster-project-plus-$FPPVERSION.desktop # remove old shortcut
-	rm -f ~/Desktop/faster-project-plus-$FPPVERSION.desktop
-	touch ~/.local/share/applications/faster-project-plus-$FPPVERSION.desktop # fixes very rare tee bug?
+	rm -f ~/.local/share/applications/faster_project_plus_$FPPVERSION.desktop # remove old shortcut
+	rm -f ~/Desktop/faster_project_plus_$FPPVERSION.desktop
+	touch ~/.local/share/applications/faster_project_plus_$FPPVERSION.desktop # fixes very rare tee bug?
 	EXEPATH="$(pwd)/bin"
 	FPPNAME="Faster Project Plus $FPPVERSION"
 	echo "[Desktop Entry]
@@ -336,12 +336,13 @@ GenericName=Wii/GameCube Emulator
 Comment=Ishiiruka fork for SSBPM
 Categories=Emulator;Game;
 Icon=$EXEPATH/ishiiruka.png
-Keywords=ProjectM;Project M;ProjectPlus;Project Plus;Project+
-Version=$FPPVERSION
+Keywords=ProjectM;Project M;ProjectPlus;Project Plus;Project+;
+Version=1.1
 Name=$FPPNAME
-Exec=$EXEPATH/ishiiruka" | tee ~/.local/share/applications/faster-project-plus-$FPPVERSION.desktop > /dev/null
-	cp ~/.local/share/applications/faster-project-plus-$FPPVERSION.desktop ~/Desktop
-	chmod +x ~/Desktop/faster-project-plus-$FPPVERSION.desktop
+TryExec=$EXEPATH/ishiiruka
+Exec=$EXEPATH/ishiiruka" | tee ~/.local/share/applications/faster_project_plus_$FPPVERSION.desktop > /dev/null
+	cp ~/.local/share/applications/faster_project_plus_$FPPVERSION.desktop ~/Desktop
+	chmod +x ~/Desktop/faster_project_plus_$FPPVERSION.desktop
 else
 	echo ".local folder not found, skipping desktop shortcut."
 fi
