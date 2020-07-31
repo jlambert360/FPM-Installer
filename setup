@@ -325,7 +325,9 @@ sed -i -e "s|ISODirPath|${IsoPath}|" $ConfigPath
 echo "Creating shortcuts..."
 ln -s "$FOLDERNAME/bin/ishiiruka" ../launch-fpp
 if [ "$SHORTCUTBOOL" -eq 1 ] && [ -d ~/.local/share/applications ]; then
+	rm -f ~/.local/share/applications/faster-project-plus-$FPPVERSION.desktop # remove shortcut from older setups
 	rm -f ~/.local/share/applications/faster_project_plus_$FPPVERSION.desktop # remove old shortcut
+	rm -f ~/Desktop/faster-project-plus-$FPPVERSION.desktop # Remove desktop files from previous setups
 	rm -f ~/Desktop/faster_project_plus_$FPPVERSION.desktop
 	touch ~/.local/share/applications/faster_project_plus_$FPPVERSION.desktop # fixes very rare tee bug?
 	EXEPATH="$(pwd)/bin"
