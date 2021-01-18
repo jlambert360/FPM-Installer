@@ -3,7 +3,17 @@
 # --- Stops the script if errors are encountered. ---
 set -e
 
-CPUS=8
+# --- Attempts to determine the number of cores in the CPU. ---
+# Source: https://gist.github.com/jj1bdx/5746298
+# Linux and similar...
+CPUS=$(getconf _NPROCESSORS_ONLN 2>/dev/null)
+# FreeBSD and similar...
+[ -z "$CPUS" ] && CPUS=$(getconf NPROCESSORS_ONLN)
+# Solaris and similar...
+[ -z "$CPUS" ] && CPUS=$(ksh93 -c 'getconf NPROCESSORS_ONLN')
+# Give up...
+[ -z "$CPUS" ] && CPUS=1
+# ---
 
 # --- define custom config links here!
 FPPVERSION="" # name of FPP version, used in folder name
@@ -32,13 +42,13 @@ ARPATCH=1
 # ---
 
 
-FPPVERSION="2.15"
+FPPVERSION="2.2"
 CONFIGNAME="fppconfig"
-COMMITHASH="d6800a124dbba118e297188900d07adfea661b87"
+COMMITHASH="54e8f2407bccff421046872701fa6a8ef94e227a"
 CONFIGLINK="https://github.com/Birdthulu/FPM-Installer/raw/master/config/$FPPVERSION-$CONFIGNAME.tar.gz"
 GITCLONELINK="https://github.com/Birdthulu/Ishiiruka"
-SdCardFileName="ProjectPlusSdCard215.tar.gz"
-SdCardDlHash="0anckw4hrxlqn5i"
+SdCardFileName="2.2+Final+Fixed+SD.raw"
+SdCardDlHash="2wy1q6btypdjnor"
 SdCardLink="http://www.mediafire.com/file/$SdCardDlHash/$SdCardFileName/file"
 echo "Installing version $FPPVERSION!"
 
