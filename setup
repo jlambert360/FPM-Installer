@@ -304,73 +304,22 @@ rm -f ../launch-faster-project-plus # -f required if shortcuts do not exist
 rm -f ../launch-fpp
 # # ---
 
-# rm AppDir -r;
-# mkdir AppDir;
+# --- Get Main path and Set Up path variables for config/Dolphin.ini 
+echo "Setting config paths"
+MainDir=$(pwd)"/bin"
+LauncherDir="$MainDir/Launcher"
+GamesDir="$MainDir/Games"
+SDPath="$MainDir/User/Wii/sd.raw"
+IsoPath="$GamesDir/RSBE01.iso"
+ConfigPath="$MainDir/User/Config/Dolphin.ini"
+# ---
 
-# make install DESTDIR=AppDir;
-# LINUXDEPLOY_PATH="https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous"
-# LINUXDEPLOY_FILE="linuxdeploy-x86_64.AppImage"
-# LINUXDEPLOY_URL="${LINUXDEPLOY_PATH}/${LINUXDEPLOY_FILE}"
-
-# UPDATEPLUG_PATH="https://github.com/linuxdeploy/linuxdeploy-plugin-appimage/releases/download/continuous"
-# UPDATEPLUG_FILE="linuxdeploy-plugin-appimage-x86_64.AppImage"
-# UPDATEPLUG_URL="${UPDATEPLUG_PATH}/${UPDATEPLUG_FILE}"
-
-# UPDATETOOL_PATH="https://github.com/AppImage/AppImageUpdate/releases/download/continuous"
-# UPDATETOOL_FILE="appimageupdatetool-x86_64.AppImage"
-# UPDATETOOL_URL="${UPDATETOOL_PATH}/${UPDATETOOL_FILE}"
-
-# DESKTOP_APP_URL="https://github.com/project-slippi/slippi-desktop-app"
-# DESKTOP_APP_SYS_PATH="./slippi-desktop-app/app/dolphin-dev/overwrite/Sys"
-
-# APPDIR_BIN="./AppDir/usr/bin"
-
-# function download_file {
-# 	url = $1
-# 	output = $2
-# 	echo "Attempting with Axel";
-# 	if [ -x "$(command -v axel)" ]; then
-# 		axel "$url" -a -n $CPUS --output $output; 
-# 	elif [ -x "$(command -v aria2c)" ]; then
-# 		echo "Axel command failed, dependency may be missing, attempting with aria2c";
-# 		aria2c -x $CPUS "$url" -o $output;
-# 	else
-# 	echo "Axel and Aria2c command failed, dependency may be missing, reverting to slowest way possible";
-# 	wget "$url" -O $output;
-# 	fi
-# }
-
-# # Grab various appimage binaries from GitHub if we don't have them
-# if [ ! -e ./linuxdeploy ]; then
-# fi
-# if [ ! -e ./linuxdeploy-update-plugin ]; then
-# 	aria2c -x 8 ${LINUXDEPLOY_URL} -o ./linuxdeploy
-# 	chmod +x ./linuxdeploy
-# 	aria2c -x 8 ${UPDATEPLUG_URL} -o ./linuxdeploy-update-plugin
-# 	chmod +x ./linuxdeploy-update-plugin
-# 	aria2c -x 8 ${UPDATETOOL_URL} -o ./appimageupdatetool
-# 	chmod +x ./appimageupdatetool
-# fi
-# if [ ! -e ./appimageupdatetool ]; then
-# fi
-
-# OUTPUT="FasterProjectPlus-x86_64.AppImage" ./linuxdeploy --appdir AppDir/ --output appimage -i ./Ishiiruka/bin/ishiiruka.png -d ././Ishiiruka/bin/faster-project-plus.desktop 
-# # --- Get Main path and Set Up path variables for config/Dolphin.ini 
-# echo "Setting config paths"
-# MainDir="../AppDir/usr/bin"
-# LauncherDir="$MainDir/Launcher"
-# GamesDir="$MainDir/Games"
-# SDPath="$MainDir/User/Wii/sd.raw"
-# IsoPath="$GamesDir/RSBE01.iso"
-# ConfigPath="$MainDir/User/Config/Dolphin.ini"
-# # ---
-
-# # --- Set LauncherDir, GamesDir, SdCardPath, and Default ISO path in config/Dolphin.ini
-# sed -i -e "s|LauncherDir|${LauncherDir}|" $ConfigPath
-# sed -i -e "s|GamesPath|${GamesDir}|" $ConfigPath
-# sed -i -e "s|SDPath|${SDPath}|" $ConfigPath
-# sed -i -e "s|ISODirPath|${IsoPath}|" $ConfigPath
-# # ---
+# --- Set LauncherDir, GamesDir, SdCardPath, and Default ISO path in config/Dolphin.ini
+sed -i -e "s|LauncherDir|$LauncherDir|" $ConfigPath
+sed -i -e "s|GamesPath|$GamesDir|" $ConfigPath
+sed -i -e "s|SDPath|$SDPath|" $ConfigPath
+sed -i -e "s|ISODirPath|$IsoPath|" $ConfigPath
+# ---
 
 # --- create symlink to newly compiled dolphin-emu. if queued, create shortcut.
 echo "Creating shortcuts..."
