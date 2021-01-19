@@ -87,6 +87,7 @@ User/Load/textures/RSBE01/ after installation.
     V3.1: Optional parallel downloads, increases the speed by magnitudes.
     v4.0: Added support for Ubuntu 20.04
     v5.0: Support for version 2.15.
+    v6.0: Support for version 2.2.
 
 ## Thanks in part by:
 

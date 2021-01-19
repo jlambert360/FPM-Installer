@@ -7,14 +7,14 @@ set -e
 # --- Based Off of/Ripped from https://github.com/FasterMelee/FasterMelee-installer/ Thank you Faster Melee Team!
 # ---
 
-# if [ -f "./setup" ] && [ -z "${IN_NIX_SHELL++}" ]; then
-# 	echo "You are running a hosted copy of the script. Please *delete the local file 'setup'* and run"
-# 	echo ""
-# 	echo "sh -c \"\$(curl -Ls https://github.com/Birdthulu/FPM-Installer/raw/master/setup)"
-# 	echo ""
-# 	echo "to ensure you have the latest version!"
-# 	exit
-# fi
+if [ -f "./setup" ] && [ -z "${IN_NIX_SHELL++}" ]; then
+	echo "You are running a hosted copy of the script. Please *delete the local file 'setup'* and run"
+	echo ""
+	echo "sh -c \"\$(curl -Ls https://github.com/Birdthulu/FPM-Installer/raw/master/setup)"
+	echo ""
+	echo "to ensure you have the latest version!"
+	exit
+fi
 
 # --- Attempts to determine the number of cores in the CPU. ---
 # Source: https://gist.github.com/jj1bdx/5746298
@@ -75,21 +75,6 @@ else
 fi
 # ---
 
-if [ "$UBPATCH" != 1 ]; then
-	# --- ask if the user is on Arch or a derivative
-	echo ""
-	echo "Are you running Arch or downstream distribution? This applies a patch allowing the installer to work. (y/N)"
-	read -r RESP
-	if [ "$RESP" = "y" ] || [ "$RESP" = "Y" ]; then
-		echo "Applying patch!"
-		ARPATCH=1
-	else
-		echo "Will not apply patch."
-		ARPATCH=0
-	fi
-fi
-# ---
-
 
 # --- if custom links aren't defined, prompt to choose a version
 if [ -z "$FPPVERSION" ] || [ -z "$COMMITHASH" ] || [ -z "$GITCLONELINK" ] || [ -z "$CONFIGLINK" ]; then #ORs used to ensure everything filled out
@@ -110,11 +95,11 @@ if [ -z "$FPPVERSION" ] || [ -z "$COMMITHASH" ] || [ -z "$GITCLONELINK" ] || [ -
 	else
 		FPPVERSION="2.2"
 		CONFIGNAME="fppconfig"
-		COMMITHASH="54e8f2407bccff421046872701fa6a8ef94e227a"
+		COMMITHASH="4aa077433453fcd06d28b66a52f6f939c46254c9"
 		CONFIGLINK="https://github.com/Birdthulu/FPM-Installer/raw/master/config/$FPPVERSION-$CONFIGNAME.tar.gz"
 		GITCLONELINK="https://github.com/Birdthulu/Ishiiruka"
-		SdCardFileName="2.2+Final+Fixed+SD.raw"
-		SdCardDlHash="2wy1q6btypdjnor"
+		SdCardFileName="ProjectPlusSdCard22.tar.gz"
+		SdCardDlHash="m4lxtm1uu64odl7"
 		SdCardLink="http://www.mediafire.com/file/$SdCardDlHash/$SdCardFileName/file"
 	fi
 	echo "Installing version $FPPVERSION!"
@@ -227,17 +212,6 @@ echo "Patching DiscExtractor.h"
 sed -i "s|#include <optional>|#include <optional>\n#include <string>|g" Source/Core/DiscIO/DiscExtractor.h
 # ---
 
-# --- Set compiler to ggc-8 for Arch
-if [ "$ARPATCH" -eq 1 ]; then
-	echo "Setting compiler to gcc-8 for Arch based distros"
-	# Set C compiler and C++ compiler to GCC8
-	export CC="gcc-8"
-	export CXX="g++-8"
-else
-	echo "Skipping patch for Arch based distros"
-fi
-# ---
-
 # --- Patch wxWidgets3 for Ubuntu 20.04
 if [ "$UBPATCH" -eq 1 ]; then
 	echo "Patching wxWidgets3 for Ubuntu 20.04 based distros"
@@ -289,10 +263,10 @@ else
  wget "$url"
 fi
 
-# echo "Extracting sd card"
-# tar -xzf "$SdCardFileName" --checkpoint-action='exec=printf "%d/12130 records extracted.\r" $TAR_CHECKPOINT' --totals
-mv "2.2" "Binaries/User/Wii/sd.raw"
-# rm "$SdCardFileName"
+echo "Extracting sd card"
+tar -xzf "$SdCardFileName" --checkpoint-action='exec=printf "%d/12130 records extracted.\r" $TAR_CHECKPOINT' --totals
+mv "sd.raw" "Binaries/User/Wii/sd.raw"
+rm "$SdCardFileName"
 # ---
 
 # --- Delete created files and old symlinks, isolate Binaries to their own folder
