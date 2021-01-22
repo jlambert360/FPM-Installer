@@ -20,7 +20,7 @@ Currently tested on Ubuntu, but should work across *all* distributions given the
 ## Ubuntu 20.04 based distros
 If running Ubuntu 20.04 or other distros based on it you must install this dep as well.
 
-`sudo apt install libxxf86vm-dev libxmu-dev`
+`sudo apt install libxxf86vm-dev libxmu-dev libgtk2.0-dev`
 
 You must also tell the installer you are running it as well. 
 
