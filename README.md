@@ -1,5 +1,8 @@
 # Faster Project Plus Installer for Linux
 
+### THIS SCRIPT IS OUTDATED PLEASE USE THE APPIMAGE REPO INSTEAD.
+https://github.com/jlambert360/FPM-AppImage/releases/latest
+
 A script for compiling Faster Project Plus on Linux. Current Version: **2.15**
 
 Currently tested on Ubuntu, but should work across *all* distributions given the right dependencies. Older versions can be found under `config/legacy/`.
