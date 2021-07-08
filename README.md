@@ -29,6 +29,7 @@ You must also tell the installer you are running it as well.
 
 ## Other Deps
 
+
 For most users (including Fedora 24+), see [this page](https://wiki.dolphin-emu.org/index.php?title=Building_Dolphin_on_Linux) for an easy to install list of dependencies; otherwise, see below.
 
 ## NixOS: 
@@ -63,15 +64,13 @@ SD card file size 2Gb zipped to 1.6Gb
 # Instructions: (READ FULLY BEFORE FOLLOWING)
 
 1. Install necessary dependcies listed using guide above. Don't forget that optional deps will bring fast downloads.
-2. Use install script to obtain FPP
-3. Move Brawl into FasterProjectPlus/bin/Games directory
-4. Run the game by opening the .elf file in dolphin
+2. Use install script to obtain FPP.
+3. Move Brawl into FasterProjectPlus/bin/Games directory.
+4. Run the game by opening the .elf file in Ishiiruka.
 
 ## To use:
 
-```sh
-sh -c "$(curl -Ls https://github.com/Birdthulu/FPM-Installer/raw/master/setup)"
-```
+`wget https://github.com/Birdthulu/FPM-Installer/raw/master/setup && chmod +x setup && ./setup`
 
 If a different version is needed (e.g. not SL default), edit the script and replace the desired variables.
 

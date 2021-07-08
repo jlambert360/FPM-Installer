@@ -7,13 +7,27 @@ set -e
 # --- Based Off of/Ripped from https://github.com/FasterMelee/FasterMelee-installer/ Thank you Faster Melee Team!
 # ---
 
-if [ -f "./setup" ] && [ -z "${IN_NIX_SHELL++}" ]; then
-	echo "You are running a hosted copy of the script. Please *delete the local file 'setup'* and run"
-	echo ""
-	echo "sh -c \"\$(curl -Ls https://github.com/Birdthulu/FPM-Installer/raw/master/setup)"
-	echo ""
-	echo "to ensure you have the latest version!"
-	exit
+#If they don't have the setup file, skip the hash check and just continue the script
+if [ -e setup ]
+then
+	ONLINEMASTER=$(curl -Ls https://github.com/Birdthulu/FPM-Installer/raw/master/setup | md5sum)
+	CURRENTMASTER=$(md5sum setup)
+
+	##Cut these down to just 32 hex chars
+	ONLINEMASTER=$(echo $ONLINEMASTER | cut -c -32)
+	CURRENTMASTER=$(echo $CURRENTMASTER | cut -c -32)
+	echo "Online Version:" $ONLINEMASTER
+	echo "Your Version:" $CURRENTMASTER
+	if [ -f "./setup" ] && [ "$ONLINEMASTER" != "$CURRENTMASTER" ]; then
+		echo "You are running a out of date copy of this install script. Please delete the local file 'setup' and run"
+		echo ""
+		echo "wget https://github.com/Birdthulu/FPM-Installer/raw/master/setup && chmod +x setup && ./setup"
+		echo ""
+		echo "to ensure you have the latest version!"
+		exit
+	fi
+else
+	echo "No setup script on disk found. Runing script anyway."
 fi
 
 # --- Attempts to determine the number of cores in the CPU. ---
